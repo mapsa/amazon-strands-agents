@@ -52,7 +52,7 @@ cp .env.example .env
 GITHUB_TOKEN=your_github_token_here
 ```
 
-You can generate a new GitHub token at [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/tokens). The token needs at least `read:org` scope to check organization availability.
+You can generate a new GitHub token at [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/personal-access-tokens). The token needs at least `read:org` scope to check organization availability.
 
 ### AWS Account Setup
 
@@ -114,14 +114,6 @@ Or through make (uses a default description):
 make
 ```
 
-### Testing
-
-Run tests with:
-
-```bash
-make test
-```
-
 ## How It Works
 
 This example showcases how to create an AI agent using the Strands framework that:
@@ -134,14 +126,14 @@ This example showcases how to create an AI agent using the Strands framework tha
 
 The agent is composed of:
 
-- A system prompt that defines the agent's behavior
+- A system prompt that defines the agent's behaviour
 - Tools for domain name and GitHub availability checking
 - Integration with Amazon Bedrock for text generation
 
 ## Customizing the Project
 
 1. Update project information in `pyproject.toml`
-1. Modify the system prompt in `agent.py` to change agent behavior
+1. Modify the system prompt in `agent.py` to change agent behaviour
 1. Add new tools to enhance agent capabilities
 1. Implement additional CLI commands for more functionality
 

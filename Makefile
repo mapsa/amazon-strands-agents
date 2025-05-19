@@ -19,9 +19,6 @@ install:
 	@echo "Installing/updating production dependencies..."
 	@uv sync
 
-test: dev
-	pytest
-
 dev: install
 	@echo "Installing development dependencies..."
 	@uv pip install -e .
