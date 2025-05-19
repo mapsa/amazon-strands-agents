@@ -34,8 +34,56 @@ A demonstration project that showcases how to build AI agents using Amazon Stran
 - [uv](https://github.com/astral-sh/uv) package manager
 - AWS credentials with Bedrock access
 - [uvx](https://github.com/Unstructured-IO/uvx) for the MCP server
+- GitHub personal access token for GitHub organization validation
 
 ## Getting Started
+
+### Environment Setup
+
+1. Create a `.env` file by copying the example:
+
+```bash
+cp .env.example .env
+```
+
+2. Add your GitHub personal access token to the `.env` file:
+
+```bash
+# In .env file
+GITHUB_TOKEN=your_github_token_here
+```
+
+You can generate a new GitHub token at [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/tokens). The token needs at least `read:org` scope to check organization availability.
+
+### AWS Account Setup
+
+1. Ensure you have an AWS account with access to Amazon Bedrock.
+
+1. Configure AWS SSO for authentication:
+
+   ```bash
+   # Configure AWS SSO
+   aws configure sso
+   # Follow the prompts to set up your SSO profile
+   ```
+
+1. Verify your AWS profile has the following permissions:
+
+   - `bedrock:InvokeModel`
+   - `bedrock:InvokeModelWithResponseStream`
+
+1. You can refresh your AWS SSO session anytime using:
+
+   ```bash
+   make aws-login
+   ```
+
+1. To use a specific AWS profile, add the following to your `.env` file:
+
+   ```bash
+   # In .env file
+   AWS_PROFILE=your_aws_profile_name
+   ```
 
 ### Installation
 
@@ -100,7 +148,9 @@ The agent is composed of:
 
 ## Development Workflow
 
-1. **Setup**: `make dev` installs all dependencies and pre-commit hooks
+1. **Setup**:
+   - `make dev` installs all dependencies and pre-commit hooks
+   - Create and configure your `.env` file with required tokens
 1. **AWS Authentication**: `make aws-login` sets up your AWS SSO session
 1. **Development**:
    - Write agent code in `src/strands_agents_example/`

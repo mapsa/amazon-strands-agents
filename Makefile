@@ -7,8 +7,13 @@ all: install aws-login
 	@naming_agent --project-description "AI agent builder"
 
 aws-login:
-	@echo "Refreshing AWS SSO session..."
-	@aws sso login
+	@echo "Checking AWS SSO session..."
+	@if ! aws sts get-caller-identity > /dev/null 2>&1; then \
+		echo "AWS session expired. Refreshing..."; \
+		aws sso login; \
+	else \
+		echo "AWS session is valid"; \
+	fi
 
 install:
 	@echo "Installing/updating production dependencies..."
