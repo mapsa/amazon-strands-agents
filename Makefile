@@ -1,10 +1,14 @@
-.PHONY: all test install dev clean
+.PHONY: all test install dev clean aws-login
 PYTHON = python3
 
 -include .env
 
-all: install
-	@your-cli --name "World"
+all: install aws-login
+	@naming_agent --project-description "AI agent builder"
+
+aws-login:
+	@echo "Refreshing AWS SSO session..."
+	@aws sso login
 
 install:
 	@echo "Installing/updating production dependencies..."

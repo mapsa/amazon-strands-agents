@@ -1,16 +1,15 @@
-# Python Project Template
+# Strands Agents Example
 
-A modern Python project template that provides a standardized structure for Python development with best practices for dependency management, code quality, and automation.
+A demonstration project that showcases how to build AI agents using Amazon Strands Framework with Amazon Bedrock models.
 
 ## Features
 
-- **Modern Structure**: Clear separation between source code, tests, and notebooks
-- **Package Management**: Uses [uv](https://github.com/astral-sh/uv) for fast, reliable package management
-- **Dependency Management**: Centralized in `pyproject.toml` following PEP 621
-- **Build Automation**: Makefile with common development tasks
-- **Code Quality**: Pre-commit hooks for consistent code quality
-- **CLI Support**: Ready-to-use [Click](https://click.palletsprojects.com/) command-line interface
-- **Testing**: Pytest setup with example tests
+- **Project Name Generator**: An AI agent that suggests names for open source projects
+- **Domain & GitHub Validation**: Checks if suggested domain names and GitHub organizations are available
+- **Strands Integration**: Uses the Amazon Strands Agent Framework
+- **Bedrock Models**: Leverages Amazon Bedrock foundation models
+- **MCP Server**: Utilizes Model Context Protocol server for tool execution
+- **CLI Support**: Provides a convenient command-line interface
 
 ## Project Structure
 
@@ -20,9 +19,10 @@ A modern Python project template that provides a standardized structure for Pyth
 ├── pyproject.toml         # Project metadata and dependencies
 ├── README.md              # This file
 ├── src/                   # Source code
-│   ├── notebooks/         # Jupyter notebooks
-│   └── your_package/      # Main package
+│   ├── notebooks/         # Jupyter notebooks for exploration
+│   └── strands_agents_example/ # Main package
 │       ├── __init__.py
+│       ├── agent.py       # Agent implementation
 │       └── cli.py         # Command-line interface
 └── tests/                 # Test suite
     └── test_cli.py        # CLI tests
@@ -32,16 +32,18 @@ A modern Python project template that provides a standardized structure for Pyth
 
 - Python 3.12+
 - [uv](https://github.com/astral-sh/uv) package manager
+- AWS credentials with Bedrock access
+- [uvx](https://github.com/Unstructured-IO/uvx) for the MCP server
 
 ## Getting Started
 
 ### Installation
 
-Clone this template and install dependencies:
+Clone this repository and install dependencies:
 
 ```bash
-git clone https://github.com/yourusername/python-project-template.git
-cd python-project-template
+git clone https://github.com/yourusername/amazon-strands-agents.git
+cd amazon-strands-agents
 make install
 ```
 
@@ -53,13 +55,13 @@ make dev
 
 ### Usage
 
-Run the sample CLI:
+Run the project naming agent:
 
 ```bash
-your-cli --name "YourName"
+naming_agent --project-description "your project description"
 ```
 
-Or through make:
+Or through make (uses a default description):
 
 ```bash
 make
@@ -73,50 +75,45 @@ Run tests with:
 make test
 ```
 
-## Customizing the Template
+## How It Works
 
-1. Update project information in `pyproject.toml`:
+This example showcases how to create an AI agent using the Strands framework that:
 
-   - Change `name`, `version`, `description`
-   - Update `authors` with your information
-   - Modify `dependencies` as needed
+1. Takes a project description as input
+1. Generates potential project names
+1. Validates domain name availability using a custom MCP server
+1. Verifies GitHub organization name availability using HTTP requests
+1. Returns suggestions for available project names
 
-1. Rename directories:
+The agent is composed of:
 
-   - Change `src/your_package` to your actual package name
-   - Update imports in all files
+- A system prompt that defines the agent's behavior
+- Tools for domain name and GitHub availability checking
+- Integration with Amazon Bedrock for text generation
 
-1. Update CLI:
+## Customizing the Project
 
-   - Modify `src/your_package/cli.py` with your actual commands
-   - Update `[project.scripts]` in `pyproject.toml` with your CLI name
+1. Update project information in `pyproject.toml`
+1. Modify the system prompt in `agent.py` to change agent behavior
+1. Add new tools to enhance agent capabilities
+1. Implement additional CLI commands for more functionality
 
 ## Development Workflow
 
-This template supports a smooth development workflow:
-
 1. **Setup**: `make dev` installs all dependencies and pre-commit hooks
+1. **AWS Authentication**: `make aws-login` sets up your AWS SSO session
 1. **Development**:
-   - Write code in `src/your_package/`
+   - Write agent code in `src/strands_agents_example/`
    - Create tests in `tests/`
    - Use notebooks in `src/notebooks/` for exploration
-1. **Code Quality**: Pre-commit hooks enforce:
-   - Code formatting with Black
-   - Import sorting with isort
-   - Linting with Ruff
 1. **Testing**: `make test` runs all tests
 
-## Package Details
+## Dependencies
 
-- **Dependencies**:
-
-  - Runtime: click
-  - Development: pytest, ruff, black, isort, pre-commit, ipykernel, ipywidgets
-
-- **Build System**: Uses hatchling for package building
-
-- **Python Version**: Requires Python 3.12+
+- **Core**: strands-agents, strands-agents-tools
+- **CLI**: click
+- **Development**: pytest, ruff, black, isort, pre-commit, ipykernel, ipywidgets
 
 ______________________________________________________________________
 
-*To use this template, fork or clone this repository and customize it for your project.*
+*For more information about Amazon Strands, visit [Amazon Strands SDK](https://aws.amazon.com/blogs/opensource/introducing-strands-agents-an-open-source-ai-agents-sdk/).*
