@@ -33,7 +33,6 @@ A demonstration project that showcases how to build AI agents using Amazon Stran
 - Python 3.12+
 - [uv](https://github.com/astral-sh/uv) package manager
 - AWS credentials with Bedrock access
-- [uvx](https://github.com/Unstructured-IO/uvx) for the MCP server
 - GitHub personal access token for GitHub organization validation
 
 ## Getting Started
